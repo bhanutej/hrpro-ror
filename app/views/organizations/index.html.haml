@@ -1,0 +1,26 @@
+.content
+  .container-fluid
+    .row
+      .col-md-12
+        .card
+          .card-header{ 'data-background-color' => 'purple' }
+            %h4.title Organizations
+            %p.category Organizations List
+          .card-content.table-responsive
+            %table.table
+              %thead.text-primary
+                %th Name
+                %th Established Date
+                %th Domain
+                %th Employees
+              %tbody
+                - @organizations.each do |organization|
+                  %tr
+                    %td
+                      = organization.name
+                    %td
+                      = organization.estb_date
+                    %td
+                      = organization.domain
+                    %td
+                      = organization.users_count

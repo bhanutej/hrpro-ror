@@ -1,0 +1,13 @@
+$('.new_organization .row').each(function(){
+  $(this).find('.form-group').each(function(){
+    $(this).find('.text-danger').html('');
+  });
+});
+<% if @organization.errors.present? %>
+  <% @organization.errors.messages.each do |key, value| %>
+    $('.<%= key.to_s %>').addClass('has-error');
+    $('.<%= key.to_s %>').append("<div class='text-danger'><%= key %> <%= value[0] %></div>");
+  <% end %>
+<% else %>
+    showNotification("success", "Successfully created");
+<% end %>

@@ -11,8 +11,9 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery_ujs
 //= require jquery-ui
-//= require_tree .
 //= require material.min
 //= require material-dashboard
 //= require bootstrap-notify
+//= require common

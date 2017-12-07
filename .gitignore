@@ -96,3 +96,5 @@ public/temp/csv
 sample.html.haml
 *scaffold*
 /db/schema.rb
+
+.DS_Store

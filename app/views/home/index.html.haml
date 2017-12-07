@@ -1,0 +1,17 @@
+.content
+  .container-fluid
+    .row
+      .col-lg-3.col-md-6.col-sm-6
+        .card.card-stats
+          %a{ href: "#{organizations_path}"  }
+            .card-header{"data-background-color" => "orange"}
+              %i.material-icons domain
+          .card-content
+            %a{ href: "#{organizations_path}" }
+              %p.category Organizations
+              %h3.title.org-count
+                = @organizations.size
+          .card-footer
+            .stats
+              %i.material-icons.text-danger domain
+              %a{:href => "#{new_organization_path}"} Add organization
