@@ -1,0 +1,29 @@
+.sidebar{ data: { color: 'purple', image: ''  }  }
+  /
+    Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
+    Tip 2: you can also add an image using data-image tag
+  .logo
+    %a.simple-text{:href => "#{root_path}"}
+      = t('app_name')
+  .sidebar-wrapper
+    %ul.nav
+      %li
+        %a{:href => '#' }
+          %i.material-icons dashboard
+          %p
+            = 'dashboard'
+      %li
+        %a{ href: '#'  }
+          %i.material-icons assignment
+          %p
+            = 'my_notes'
+      %li
+        %a{:href => '#' }
+          %i.material-icons assignment_ind
+          %p
+            = 'shared_with_me'
+      %li
+        %a{ href: "#{destroy_user_session_path}", data: { method: 'delete'  }  }
+          %i.material-icons exit_to_app
+          %p
+            = 'sign_out'
