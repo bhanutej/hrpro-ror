@@ -91,7 +91,6 @@ pickle-email-*.html
 .tags.haml-i18n-extractor
 public/temp/csv
 /.project
-*.lock
 
 *sample_post*
 sample.html.haml
