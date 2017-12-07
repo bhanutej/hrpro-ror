@@ -1,0 +1,7 @@
+- flash.each do |key, value|
+  - if black_list_alerts.exclude? value
+    %div.text-warning{ class: "alert-msg alert-#{ key  }"  }
+      %a{ href:'#', 'data-dismiss': :"alert-#{ key  }", class: 'close'  }
+        &times;
+      = "#{value}"
+
