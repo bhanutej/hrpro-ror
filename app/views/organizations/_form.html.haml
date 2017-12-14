@@ -1,4 +1,4 @@
-= form_for @organization, html: {multipart: :true}, remote: true, authenticity_token: true do |f|
+= form_for organization, html: {multipart: :true}, remote: true, authenticity_token: true do |f|
   .row
     .col-md-5
       .form-group.label-floating.name
@@ -6,8 +6,8 @@
         = f.text_field :name, class: 'form-control'
     .col-md-4
       .form-group.label-floating.estb_date
-        %label.control-label Estb Date
-        = f.text_field :estb_date, class: 'form-control'
+        %label.control-label Estb Date(mm/dd/YYYY)
+        = f.text_field :estb_date, class: 'form-control datepicker', id: 'datepicker', value: "#{organization.estb_date.strftime('%d/%m/%Y') if organization.estb_date.present? }"
     .col-md-3
       .form-group.label-floating.domain
         %label.control-label Domain
@@ -19,37 +19,42 @@
         .form-group.label-floating.description
           %label.control-label Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.
           = text_area :organization, :description, class: 'form-control', rows: '5'
-  -# = f.fields_for :addresses do |address|
+  %label Address:
+  = f.fields_for :addresses, action_name == 'new' ? Address.new : nil do |addresses_form|
     .row
-      .col-md-12
-        .form-group
-          %label Address
-          .row
-            .col-md-12
-              .col-md-4
-                .form-group.label-floating.street_address1
-                  %label.control-label Street1
-                  = address.text_field :street_address1, class: 'form-control'
-              .col-md-4
-                .form-group.label-floating.street_address2
-                  %label.control-label Street2
-                  = address.text_field :street_address2, class: 'form-control'
-              .col-md-4
-                .form-group.label-floating.city
-                  %label.control-label City
-                  = address.text_field :city, class: 'form-control'
-          .row
-            .col-md-12
-              .col-md-4
-                .form-group.label-floating.state
-                  %label.control-label State
-                  = address.text_field :state, class: 'form-control'
-              .col-md-4
-                .form-group.label-floating.postal_code
-                  %label.control-label postal_code
-                  = address.text_field :postal_code, class: 'form-control'
-              .col-md-4
-                .form-group.label-floating.country
-                  %label.control-label country
-                  = address.text_field :country, class: 'form-control'
+      .col-md-4
+        .form-group.label-floating.street_address1
+          %label.control-label Street Address1
+          = addresses_form.text_field :street_address1, class: 'form-control'
+      .col-md-4
+        .form-group.label-floating.street_address2
+          %label.control-label Street Address2
+          = addresses_form.text_field :street_address2, class: 'form-control'
+      .col-md-4
+        .form-group.label-floating.city
+          %label.control-label City
+          = addresses_form.text_field :city, class: 'form-control'
+    .row
+      .col-md-4
+        .form-group.label-floating.state
+          %label.control-label State
+          = addresses_form.text_field :state, class: 'form-control'
+      .col-md-4
+        .form-group.label-floating.postal_code
+          %label.control-label Postal Code
+          = addresses_form.text_field :postal_code, class: 'form-control'
+      .col-md-4
+        .form-group.label-floating.country
+          %label.control-label Country
+          = addresses_form.text_field :country, class: 'form-control'
+
   = f.submit :Create, class: 'btn btn-primary pull-right'
+
+:javascript
+  $( function() {
+    $('.datepicker').datepicker()
+      .on('changeDate', function(ev){
+        $(this).parent('.label-floating').removeClass('is-empty');
+        $(this).parent('.label-floating').removeClass('has-error');
+    });
+  });

@@ -35,8 +35,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string    :account_number
       t.string    :emp_id
       t.string    :bank_name
-      t.datetime  :date_of_join,        default: DateTime.now
-      t.datetime  :date_of_birth
+      t.date  :date_of_join,        default: DateTime.now
+      t.date  :date_of_birth
       t.string    :blood_group
       t.string    :contact
       t.string    :role

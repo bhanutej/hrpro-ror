@@ -15,5 +15,6 @@
 //= require jquery-ui
 //= require material.min
 //= require material-dashboard
+//= require bootstrap-datepicker
 //= require bootstrap-notify
 //= require common

@@ -5,7 +5,7 @@ class CreateUserPaySlips < ActiveRecord::Migration
       t.references :pay_slip, index: true, foreign_key: true
       t.string :percent
       t.integer :amount
-      t.datetime :pay_month
+      t.date :pay_month
 
       t.timestamps null: false
     end

@@ -1,6 +1,6 @@
 class OrganizationsController < ApplicationController
   before_action :authenticate_user!
-  layout 'super_admin', only: %i(index new create)
+  layout 'super_admin', only: %i(index new create show)
   include Organizations
 
   def index
@@ -15,20 +15,22 @@ class OrganizationsController < ApplicationController
     @organization = Organization.create(organization_params)
   end
 
-  private
-
-  def organization_params
-    params.require(:organization).permit(:name, :estb_date, :domain, :description)
+  def show
+    @organization = Organization.where(id: params[:id]).first
   end
 
-  def address_params
-    address = {}
-    address[:street_address1] = params[:organization][:addresses][:street_address1]
-    address[:street_address2] = params[:organization][:addresses][:street_address2]
-    address[:city] = params[:organization][:addresses][:city]
-    address[:state] = params[:organization][:addresses][:state]
-    address[:postal_code] = params[:organization][:addresses][:postal_code]
-    address[:country] = params[:organization][:addresses][:country]
-    address
+  def update
+    @organization = Organization.where(id: params[:id]).first
+    @organization.update_attributes(organization_params)
+  end
+
+  private
+
+  # def organization_params
+  #   params.require(:organization).permit(:name, :estb_date, :domain, :description)
+  # end
+
+  def organization_params
+    params.require(:organization).permit(:name, :estb_date, :domain, :description, addresses_attributes: [:id, :street_address1, :street_address2, :city, :state, :postal_code, :country])
   end
 end
