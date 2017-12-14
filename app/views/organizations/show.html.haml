@@ -1,0 +1,32 @@
+.row.org-content
+  .col-lg-12.col-md-12
+    .card.card-nav-tabs
+      .card-header{"data-background-color" => "purple"}
+        .nav-tabs-navigation
+          .nav-tabs-wrapper
+            %span.nav-tabs-title
+              = "#{@organization.domain} :"
+            %ul.nav.nav-tabs{"data-tabs" => "tabs"}
+              %li.active
+                %a{"data-toggle" => "tab", :href => "#details"}
+                  %i.material-icons bug_report
+                  Bugs
+                  .ripple-container
+              %li
+                %a{"data-toggle" => "tab", :href => "#users"}
+                  %i.material-icons code
+                  Website
+                  .ripple-container
+              %li
+                %a{"data-toggle" => "tab", :href => "#settings"}
+                  %i.material-icons cloud
+                  Server
+                  .ripple-container
+      .card-content
+        .tab-content
+          #details.tab-pane.active
+            = render 'organizations/details', organization: @organization
+          #users.tab-pane
+            = render 'organizations/users', organization: @organization
+          #settings.tab-pane
+            = render 'organizations/settings', organization: @organization
