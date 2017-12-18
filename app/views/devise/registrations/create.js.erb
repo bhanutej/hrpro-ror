@@ -1,20 +1,21 @@
-$('.edit_organization .row').each(function(){
+$('.users-container .row').each(function(){
   $(this).find('.form-group').each(function(){
     $(this).find('.text-danger').html('');
-    $(this).removeClass('has-error');
   });
 });
-<% if @organization.errors.present? %>
-  <% @organization.errors.messages.each do |key, value| %>
+<% if @user.errors.present? %>
+  <% @user.errors.messages.each do |key, value| %>
     $('.<%= key.to_s %>').addClass('has-error');
     $('.<%= key.to_s %>').append("<div class='text-danger'><%= key %> <%= value[0] %></div>");
   <% end %>
-  <% if @organization.addresses.present? && @organization.addresses.first.errors.present? %>
-    <% @organization.addresses.first.errors.messages.each do |key, value| %>
+  <% if @user.address.present? && @user.address.errors.present? %>
+    <% @user.address.errors.messages.each do |key, value| %>
       $('.<%= key.to_s %>').addClass('has-error');
       $('.<%= key.to_s %>').append("<div class='text-danger'><%= key %> <%= value[0] %></div>");
     <% end %>
   <% end %>
 <% else %>
-  showNotification("success", "Successfully Updated");
+  var userContent = $(".users-container .stats");
+  userContent.html("<%= j render 'users/users', users: @organization.users %>");
+  showNotification("success", "Successfully created");
 <% end %>

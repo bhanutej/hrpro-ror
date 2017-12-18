@@ -1,1 +1,19 @@
-users
+.col-lg-12.col-md-12.col-sm-12.users-container
+  .card.card-stats
+    .card-header{"data-background-color" => "blue"}
+      %a{ href: "#{new_user_path(id: organization.id)}", data: { remote: true, method: :get } }
+        %i.material-icons person_add
+    .card-content
+      %p.category Used Space
+      %h3.title
+        49/50
+        %small GB
+    .stats
+      = render "users/users", users: organization.users
+
+:scss
+  .users-container{
+    .stats{
+      margin: 10px;
+    }
+  }

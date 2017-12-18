@@ -1,0 +1,8 @@
+// alert(123);
+// var modelEle = $("#myModal");
+// modelEle.find(".modal-title").html("User");
+// modelEle.find(".modal-body").html("<%= j render 'users/form', user: @user %>");
+// showModel('User');
+
+var userContent = $(".users-container .stats");
+userContent.html("<%= j render 'users/form', organization: @organization %>");

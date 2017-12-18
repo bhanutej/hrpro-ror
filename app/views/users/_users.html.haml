@@ -1,0 +1,27 @@
+.content
+  .container-fluid
+    .row
+      .col-md-12
+        .card
+          .card-content.table-responsive
+            %table.table
+              %thead.text-primary
+                %th Name
+                %th Established Date
+                %th Domain
+                %th Employees
+                %th
+              %tbody
+                - users.each do |user|
+                  %tr
+                    %td
+                      = user.email
+                    -# %td
+                    -#   = organization.estb_date
+                    -# %td
+                    -#   = organization.domain
+                    -# %td
+                    -#   = organization.users_count
+                    -# %td
+                    -#   %a.btn.btn-primary{ href: "#{organization_path(organization.id)}" }
+                    -#     = 'Check'

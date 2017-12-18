@@ -16,7 +16,7 @@ class OrganizationsController < ApplicationController
   end
 
   def show
-    @organization = Organization.where(id: params[:id]).first
+    @organization = get_organization(params[:id])
   end
 
   def update
@@ -26,11 +26,8 @@ class OrganizationsController < ApplicationController
 
   private
 
-  # def organization_params
-  #   params.require(:organization).permit(:name, :estb_date, :domain, :description)
-  # end
-
   def organization_params
-    params.require(:organization).permit(:name, :estb_date, :domain, :description, addresses_attributes: [:id, :street_address1, :street_address2, :city, :state, :postal_code, :country])
+    params.require(:organization).permit(:name, :estb_date, :domain, :description,
+      addresses_attributes: [:id, :street_address1, :street_address2, :city, :state, :postal_code, :country])
   end
 end

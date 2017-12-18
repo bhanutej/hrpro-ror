@@ -20,7 +20,7 @@
           %label.control-label Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.
           = text_area :organization, :description, class: 'form-control', rows: '5'
   %label Address:
-  = f.fields_for :addresses, action_name == 'new' ? Address.new : nil do |addresses_form|
+  = f.fields_for :addresses, action_name == 'new' || organization.addresses.blank? ? Address.new : nil do |addresses_form|
     .row
       .col-md-4
         .form-group.label-floating.street_address1
