@@ -5,22 +5,28 @@ class OrganizationsController < ApplicationController
 
   def index
     @organizations = get_organizations
+    authorize @organizations
   end
 
   def new
     @organization = Organization.new
+    authorize @organization
   end
 
   def create
-    @organization = Organization.create(organization_params)
+    @organization = Organization.new(organization_params)
+    authorize @organization
+    @organization.save
   end
 
   def show
     @organization = get_organization(params[:id])
+    authorize @organization
   end
 
   def update
     @organization = Organization.where(id: params[:id]).first
+    authorize @organization
     @organization.update_attributes(organization_params)
   end
 

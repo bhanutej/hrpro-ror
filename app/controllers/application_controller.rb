@@ -1,14 +1,22 @@
 class ApplicationController < ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  before_action :configure_permitted_parameters, if: :devise_controller?
+  include Pundit
+  # before_action :validate_subdomain
+  before_action :save_return_url_to_session
+  rescue_from Pundit::NotAuthorizedError, with: :unautherized_access
 
-  protected
+  private
 
-  def configure_permitted_parameters
-    added_attrs = [:email, :password, :password_confirmation, :remember_me]
-    devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
-    devise_parameter_sanitizer.permit :account_update, keys: added_attrs
+  def save_return_url_to_session
+    return if !request.get? || request.xhr? || devise_controller?
+    store_location_for(:user, request.fullpath)
+  end
+
+  def unautherized_access
+    render(layout: false, file: "#{Rails.root}/public/401.html", status: 401) && return
+  end
+
+  def page_not_found
+    render(layout: false, file: "#{Rails.root}/public/404.html", status: 404) && return
   end
 end

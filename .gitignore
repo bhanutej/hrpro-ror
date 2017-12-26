@@ -98,3 +98,4 @@ sample.html.haml
 /db/schema.rb
 
 .DS_Store
+.byebug_history

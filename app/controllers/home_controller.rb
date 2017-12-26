@@ -4,7 +4,11 @@ class HomeController < ApplicationController
   include Organizations
 
   def index
-    @layout = 'super_admin'
-    @organizations = get_organizations
+    if current_user.role == 'super_admin'
+      @layout = 'super_admin'
+      @organizations = get_organizations
+    elsif current_user.role == 'admin'
+
+    end
   end
 end
