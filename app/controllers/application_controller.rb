@@ -3,9 +3,18 @@ class ApplicationController < ActionController::Base
   include Pundit
   # before_action :validate_subdomain
   before_action :save_return_url_to_session
+  before_action :current_organization, if: :subdomain_present?
   rescue_from Pundit::NotAuthorizedError, with: :unautherized_access
 
   private
+
+  def current_organization
+    @current_organization ||= Organization.where(domain: request.subdomain).first
+  end
+
+  def subdomain_present?
+    request.subdomain.present? ? true : false
+  end
 
   def save_return_url_to_session
     return if !request.get? || request.xhr? || devise_controller?

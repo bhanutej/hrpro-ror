@@ -1,0 +1,4 @@
+<% if @user_pay_slips.present? %>
+  var userContent = $(".admin-container .user-content");
+  userContent.html("<%= j render 'user_pay_slips/user_payslips' %>");
+<% end %>

@@ -1,0 +1,8 @@
+<% if @user.present? %>
+  <% if @user_pay_slip.present? %>
+    $("#myModal .modal-body").html("<%= j render 'user_pay_slips/form' %>");
+    showModel("<%= @user.name %> PaySlip Generation");
+  <% end %>
+<% else %>
+  showNotification("warning", "Wrong user details!!!");
+<% end %>

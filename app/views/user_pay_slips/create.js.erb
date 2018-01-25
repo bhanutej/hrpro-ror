@@ -1,0 +1,5 @@
+<% if @user_pay_slip.errors.present? %>
+  showNotification("warning", "<%= @user_pay_slip.errors.full_messages.first %>");
+<% else %>
+  showNotification("success", "PaySlip Element Successfully Created");
+<% end %>

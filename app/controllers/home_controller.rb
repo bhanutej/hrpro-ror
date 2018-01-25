@@ -8,7 +8,8 @@ class HomeController < ApplicationController
       @layout = 'super_admin'
       @organizations = get_organizations
     elsif current_user.role == 'admin'
-
+      @layout = 'admin'
     end
   end
+
 end

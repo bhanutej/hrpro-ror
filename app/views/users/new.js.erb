@@ -1,8 +1,7 @@
-// alert(123);
-// var modelEle = $("#myModal");
-// modelEle.find(".modal-title").html("User");
-// modelEle.find(".modal-body").html("<%= j render 'users/form', user: @user %>");
-// showModel('User');
-
-var userContent = $(".users-container .stats");
-userContent.html("<%= j render 'users/form', organization: @organization %>");
+<% if current_user.role == 'super_admin' %>
+  var userContent = $(".users-container .stats");
+  userContent.html("<%= j render 'users/form', organization: @organization %>");
+<% else %>
+  var userContent = $(".admin-container .user-content");
+  userContent.html("<%= j render 'users/form', organization: @organization %>");
+<% end %>

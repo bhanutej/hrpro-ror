@@ -1,101 +1,109 @@
-= form_for @user, html: {multipart: :true}, remote: true, authenticity_token: true do |user_form|
-  %input{ type: 'hidden', name: 'id', value: @organization.id }
-  .row
-    .col-md-4
-      .form-group.label-floating.email
-        %label.control-label Email
-        = user_form.text_field :email, class: 'form-control'
-    .col-md-4
-      .form-group.label-floating.first_name
-        %label.control-label First Name
-        = user_form.text_field :first_name, class: 'form-control'
-    .col-md-4
-      .form-group.label-floating.last_name
-        %label.control-label Last Name
-        = user_form.text_field :last_name, class: 'form-control'
-  .row
-    .col-md-5
-      .form-group.label-floating.password
-        %label.control-label Password
-        = user_form.text_field :password, class: 'form-control'
-    .col-md-5
-      .form-group.label-floating.password_confirmation
-        %label.control-label Confirm Password
-        = user_form.text_field :password_confirmation, class: 'form-control'
-  .row
-    .col-md-3
-      .form-group.label-floating.bank_name
-        %label.control-label Bank Name
-        = user_form.text_field :bank_name, class: 'form-control'
-    .col-md-5
-      .form-group.label-floating.account_number
-        %label.control-label Account Number
-        = user_form.text_field :account_number, class: 'form-control'
-    .col-md-2
-      .form-group.label-floating.emp_id
-        %label.control-label Employee ID
-        = user_form.text_field :emp_id, class: 'form-control'
-    .col-md-2
-      .form-group.label-floating.blood_group
-        %label.control-label Blood Group
-        = user_form.text_field :blood_group, class: 'form-control'
-  .row
-    .col-md-5
-      .form-group.label-floating.date_of_join
-        %label.control-label Date Of Join
-        = user_form.text_field :date_of_join, class: 'form-control datepicker'
-    .col-md-4
-      .form-group.label-floating.date_of_birth
-        %label.control-label Date Of Birth
-        = user_form.text_field :date_of_birth, class: 'form-control datepicker'
-  .row
-    .col-md-5
-      .form-group.label-floating.contact
-        %label.control-label Contact Number
-        = user_form.text_field :contact, class: 'form-control'
-    .col-md-4
-      .form-group.label-floating.role
-        %label.control-label Role
-        = user_form.text_field :role, class: 'form-control'
-    .col-md-3
-      .form-group.label-floating.designation
-        %label.control-label Designation
-        = user_form.text_field :designation, class: 'form-control'
-  .row
-    .col-md-5
-      .form-group.label-floating.manager
-        %label.control-label Reporting Manager
-        = user_form.select(:manager, managers.collect {|user| [ user.name, user.id ] }, { :include_blank => "Select Manager" }, { :class => 'form-control' })
-  %label Address:
-  = user_form.fields_for :address, action_name == 'new' ? Address.new : nil do |addresses_form|
-    .row
-      .col-md-4
-        .form-group.label-floating.street_address1
-          %label.control-label Street Address1
-          = addresses_form.text_field :street_address1, class: 'form-control'
-      .col-md-4
-        .form-group.label-floating.street_address2
-          %label.control-label Street Address2
-          = addresses_form.text_field :street_address2, class: 'form-control'
-      .col-md-4
-        .form-group.label-floating.city
-          %label.control-label City
-          = addresses_form.text_field :city, class: 'form-control'
-    .row
-      .col-md-4
-        .form-group.label-floating.state
-          %label.control-label State
-          = addresses_form.text_field :state, class: 'form-control'
-      .col-md-4
-        .form-group.label-floating.postal_code
-          %label.control-label Postal Code
-          = addresses_form.text_field :postal_code, class: 'form-control'
-      .col-md-4
-        .form-group.label-floating.country
-          %label.control-label Country
-          = addresses_form.text_field :country, class: 'form-control'
+.card.card-stats
+  .card-content
+    = form_for @user, html: {multipart: :true}, remote: true, authenticity_token: true do |user_form|
+      %input{ type: 'hidden', name: 'id', value: @organization.id }
+      .row
+        .col-md-4
+          .form-group.label-floating.email
+            %label.control-label Email
+            = user_form.text_field :email, class: 'form-control'
+        .col-md-4
+          .form-group.label-floating.first_name
+            %label.control-label First Name
+            = user_form.text_field :first_name, class: 'form-control'
+        .col-md-4
+          .form-group.label-floating.last_name
+            %label.control-label Last Name
+            = user_form.text_field :last_name, class: 'form-control'
+      .row
+        .col-md-5
+          .form-group.label-floating.password
+            %label.control-label Password
+            = user_form.password_field :password, class: 'form-control'
+        .col-md-5
+          .form-group.label-floating.password_confirmation
+            %label.control-label Confirm Password
+            = user_form.password_field :password_confirmation, class: 'form-control'
+      .row
+        .col-md-3
+          .form-group.label-floating.bank_name
+            %label.control-label Bank Name
+            = user_form.text_field :bank_name, class: 'form-control'
+        .col-md-3
+          .form-group.label-floating.account_number
+            %label.control-label Account Number
+            = user_form.text_field :account_number, class: 'form-control'
+        .col-md-2
+          .form-group.label-floating.account_number
+            %label.control-label PAN Number
+            = user_form.text_field :pan_number, class: 'form-control'
+        .col-md-2
+          .form-group.label-floating.emp_id
+            %label.control-label Employee ID
+            = user_form.text_field :emp_id, class: 'form-control'
+        .col-md-2
+          .form-group.label-floating.blood_group
+            %label.control-label Blood Group
+            -# = user_form.text_field :blood_group, class: 'form-control'
+            = user_form.select :blood_group, options_for_select([["Select Blood Group", ""], "A +ve", "A -ve", "B +ve", "B -ve", "O +ve", "O -ve"]), {}, {:class => 'form-control'}
+      .row
+        .col-md-5
+          .form-group.label-floating.date_of_join
+            %label.control-label Date Of Join
+            = user_form.text_field :date_of_join, class: 'form-control datepicker'
+        .col-md-4
+          .form-group.label-floating.date_of_birth
+            %label.control-label Date Of Birth
+            = user_form.text_field :date_of_birth, class: 'form-control datepicker'
+      .row
+        .col-md-5
+          .form-group.label-floating.contact
+            %label.control-label Contact Number
+            = user_form.text_field :contact, class: 'form-control'
+        .col-md-4
+          .form-group.label-floating.role
+            %label.control-label Role
+            -# = user_form.text_field :role, class: 'form-control'
+            = user_form.select :role, options_for_select([["Select Role", ""], "admin", "manager", "user"]), {}, {:class => 'form-control'}
+        .col-md-3
+          .form-group.label-floating.designation
+            %label.control-label Designation
+            = user_form.text_field :designation, class: 'form-control'
+      .row
+        .col-md-5
+          .form-group.label-floating.manager
+            %label.control-label Reporting Manager
+            = user_form.select(:manager, managers.collect {|user| [ user.name, user.id ] }, { :include_blank => "Select Manager" }, { :class => 'form-control' })
+      %label Address:
+      = user_form.fields_for :address, action_name == 'new' ? Address.new : nil do |addresses_form|
+        .row
+          .col-md-4
+            .form-group.label-floating.street_address1
+              %label.control-label Street Address1
+              = addresses_form.text_field :street_address1, class: 'form-control'
+          .col-md-4
+            .form-group.label-floating.street_address2
+              %label.control-label Street Address2
+              = addresses_form.text_field :street_address2, class: 'form-control'
+          .col-md-4
+            .form-group.label-floating.city
+              %label.control-label City
+              = addresses_form.text_field :city, class: 'form-control'
+        .row
+          .col-md-4
+            .form-group.label-floating.state
+              %label.control-label State
+              = addresses_form.text_field :state, class: 'form-control'
+          .col-md-4
+            .form-group.label-floating.postal_code
+              %label.control-label Postal Code
+              = addresses_form.text_field :postal_code, class: 'form-control'
+          .col-md-4
+            .form-group.label-floating.country
+              %label.control-label Country
+              = addresses_form.text_field :country, class: 'form-control'
 
-  = user_form.submit :Create, class: 'btn btn-primary'
+      = user_form.submit :Create, class: 'btn btn-primary'
 
 :javascript
   $( function() {

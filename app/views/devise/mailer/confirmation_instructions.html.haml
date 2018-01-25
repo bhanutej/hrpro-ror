@@ -1,6 +1,6 @@
 %p
   Welcome #{@email}!
-%p You can confirm your account email through the link below:
+%p You can confirm your account email through the link below: use password as #{@resource.password}
 - if @resource.organization.present?
   %p= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token, :subdomain => @resource.organization.domain)
 - else

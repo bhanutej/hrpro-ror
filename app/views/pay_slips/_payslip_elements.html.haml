@@ -1,0 +1,28 @@
+%table.table
+  %thead.text-primary
+    %th Name
+    %th Pay Type
+    %th Remarks
+    %th percent
+    %th
+  %tbody
+    - if pay_slips.count > 0
+      - pay_slips.each do |pay_slip|
+        %tr
+          %td
+            = pay_slip.name
+          %td
+            = pay_slip.pay_type == true ? "Earnings" : "Deductions"
+          %td
+            = pay_slip.remark
+          %td
+            = pay_slip.percent
+          %td
+            %a{ href: "#{edit_pay_slip_path(pay_slip.id)}", 'data-remote': true  }
+              %i.material-icons border_color
+            %a{ href: "#{pay_slip_path(pay_slip.id)}" }
+              %i.material-icons delete
+    - else
+      %tr
+        %td
+          = "No payslip elements present yet!!!"

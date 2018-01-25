@@ -1,0 +1,29 @@
+.content
+  .container-fluid
+    .row
+      .col-md-12
+        .card
+          .card-content.table-responsive
+            %table.table
+              %thead.text-primary
+                %th Name
+                %th Date of Join
+                %th Designation
+                %th Contact
+                %th
+              %tbody
+                - @current_organization.users.each do |user|
+                  %tr
+                    %td
+                      = user.name
+                    %td
+                      = user.date_of_join.strftime("%b %d, %Y")
+                    %td
+                      = user.designation
+                    %td
+                      = user.contact
+                    %td
+                      %a{ href: new_user_pay_slip_path(user_id: user.id), 'data-remote': true }
+                        %i.material-icons open_in_new
+                      %a{ href: user_payslips_user_pay_slips_path(user_id: user.id), 'data-remote': true }
+                        %i.material-icons event_note

@@ -1,0 +1,31 @@
+.content
+  .container-fluid
+    .row
+      .col-md-8
+        .card
+          .card-content
+            - user_payslip_years.keys.each do |year|
+              .col-md-4
+                %button.btn.btn-primary.btn-year{ value: year.first, 'data-user': @user_id }
+                  = year.first
+
+:javascript
+  $(function () {
+    $('.btn-year').on('click', function(){
+      var year = $(this).val();
+      var userId = $(this).data("user");
+      $("#myModal .modal-body").html("#{ j render 'user_pay_slips/months_list', year: year, user_id: userId }");
+      showModel("PaySlip Generation");
+    });
+  });
+-# .col-md-4
+-#   .card.card-profile
+-#     .card-avatar
+-#       %a{:href => "#pablo"}
+-#         %img.img{:src => ""}/
+-#     .content
+-#       %h6.category.text-gray CEO / Co-Founder
+-#       %h4.card-title Alec Thompson
+-#       %p.card-content
+-#         Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+-#       %a.btn.btn-primary.btn-round{:href => "#pablo"} Follow

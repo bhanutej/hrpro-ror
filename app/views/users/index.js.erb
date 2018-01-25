@@ -1,0 +1,2 @@
+var userContent = $(".admin-container .user-content");
+userContent.html("<%= j render 'users/users', users: @current_organization.users %>");

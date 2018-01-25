@@ -1,0 +1,11 @@
+.content
+  .container-fluid
+    .row
+      .col-md-12
+        .card
+          .card-header{ 'data-background-color' => 'blue' }
+            %h4.title Pay Slip
+            %p.category.payslip-new-form
+              = render 'pay_slips/form'
+          .card-content.table-responsive.payslip-container
+            = render 'pay_slips/payslip_elements', pay_slips: @current_organization.pay_slips.reload

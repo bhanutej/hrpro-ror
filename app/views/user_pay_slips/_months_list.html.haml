@@ -1,0 +1,7 @@
+.content
+  .container-fluid
+    .row
+      - months.each do |month|
+        .col-md-2
+          %a.btn.btn-primary{:href => "#"}
+            = month

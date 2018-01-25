@@ -14,9 +14,15 @@ class OrganizationsController < ApplicationController
   end
 
   def create
-    @organization = Organization.new(organization_params)
-    authorize @organization
-    @organization.save
+    org_name = params[:organization][:name] || ""
+    @organization = Organization.where(name: org_name.strip).first
+    if @organization.blank?
+      @organization = Organization.new(organization_params)
+      authorize @organization
+      @organization.save
+    else
+      @organization.errors.add(:name, "already existed")
+    end
   end
 
   def show

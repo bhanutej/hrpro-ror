@@ -7,18 +7,18 @@
         .card-content
           = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
             -#= devise_error_messages!
-            .errors-content
-              = render "layouts/devise_flash_messages" if !flash.empty? && current_user.blank?
             .row
               .col-md-12
                 .form-group.label-floating
                   = f.label :email, class: 'control-label'
                   = f.email_field :email, autofocus: true, class: 'form-control'
+                  = render "layouts/devise_flash_messages", field: :email if !flash.empty? && current_user.blank?
             .row
               .col-md-12
                 .form-group.label-floating
                   = f.label :password, class: 'control-label'
                   = f.password_field :password, autocomplete: 'off', class: 'form-control'
+                  = render "layouts/devise_flash_messages", field: :password if !flash.empty? && current_user.blank?
               - if devise_mapping.rememberable?
                 .field
                   = f.check_box :remember_me

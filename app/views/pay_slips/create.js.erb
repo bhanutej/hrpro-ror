@@ -1,0 +1,9 @@
+<% if @pay_slip.errors.present? %>
+  <% @pay_slip.errors.messages.each do |key, value| %>
+    $('.<%= key.to_s %>').addClass('has-error');
+    $('.<%= key.to_s %>').append("<div class='text-danger'><%= key %> <%= value[0] %></div>");
+  <% end %>
+<% else %>
+  showNotification("success", "Successfully created");
+  $('.payslip-container').html("<%= j render 'pay_slips/payslip_elements', pay_slips: @current_organization.pay_slips.reload %>");
+<% end %>

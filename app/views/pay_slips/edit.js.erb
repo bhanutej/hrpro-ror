@@ -1,0 +1,7 @@
+<% if @pay_slip_element.present? %>
+  $("#myModal .modal-body").addClass('payslip-edit-form');
+  $("#myModal .modal-body").html("<%= j render 'pay_slips/form' %>");
+  showModel('PaySlip element');
+<% else %>
+  showNotification("warning", "PaySlip element not found!!!");
+<% end %>

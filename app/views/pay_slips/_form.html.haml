@@ -1,0 +1,54 @@
+.pay-form-container
+  = form_for @pay_slip_element, html: {multipart: :true}, remote: true, authenticity_token: true do |f|
+    .row{ style: 'display: flex;align-items: center;justify-content: space-between;' }
+      .col-md-4{ style: 'display: flex;align-items: center;justify-content: space-between;' }
+        .col-md-2
+          %a.pay-type
+            - if @pay_slip_element.pay_type == true
+              %i.fa.fa-2x.fa-toggle-on
+            - else
+              %i.fa.fa-2x.fa-toggle-off
+            = f.hidden_field :pay_type, class: 'form-control ptype'
+        .col-md-10
+          .form-group.label-floating.name
+            %label.control-label Element
+            = f.text_field :name, class: 'form-control'
+      .col-md-6{ style: 'display: flex;align-items: center;justify-content: space-between;' }
+        .col-md-2
+          .form-group.label-floating.percent
+            %label.control-label Percent
+            = f.text_field :percent, class: 'form-control'
+        .col-md-10
+          .form-group.label-floating.remark
+            %label.control-label Remark
+            = f.text_field :remark, class: 'form-control'
+      .col-md-2
+        %button.btn.btn-white.btn-round.btn-just-icon{ type: 'submit' }
+          %i.material-icons done
+
+:scss
+  .pay-form-container{
+    .control-label{
+      color: #4a148c !important;
+    }
+    .btn-white-circle{
+      border-radius: 50%;
+      border: 1px solid red;
+      background-color: #fff;
+      color: #aaa;
+    }
+  }
+
+:javascript
+  $(function(){
+    $('.pay-form-container').on('click', '.pay-type', function(){
+      payType = $(this).find('.ptype').val();
+      if(payType == 'false'){
+        $(this).find('.ptype').val(true);
+        $(this).find('.fa').toggleClass('fa-toggle-on fa-toggle-off');
+      }else{
+        $(this).find('.ptype').val(false);
+        $(this).find('.fa').toggleClass('fa-toggle-off fa-toggle-on');
+      }
+    });
+  });

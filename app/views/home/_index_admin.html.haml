@@ -1,0 +1,23 @@
+.content
+  .container-fluid.admin-container
+    .row.user-content
+      .col-lg-3.col-md-6.col-sm-6
+        .card.card-stats
+          .card-header{"data-background-color" => "blue"}
+            %a{ href: "#{new_user_path(id: @current_organization.id)}", data: { remote: true, method: :get } }
+              %i.material-icons person_add
+          .card-content
+            %a{ href: "#{users_path}", data: { remote: true, method: :get } }
+              %p.category Users
+              %h3.title.org-count
+                = @current_organization.users.count
+      .col-lg-3.col-md-6.col-sm-6
+        .card.card-stats
+          .card-header{"data-background-color" => "green"}
+            %a{ href: "#{new_user_path(id: @current_organization.id)}", data: { remote: true, method: :get } }
+              %i.material-icons person_add
+          .card-content
+            %a{ href: "#{pay_slips_path}", data: { remote: true, method: :get } }
+              %p.category Pay Slips Elements
+              %h3.title.org-count
+                = @current_organization.pay_slips.count

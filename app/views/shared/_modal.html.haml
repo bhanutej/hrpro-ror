@@ -5,3 +5,11 @@
         %button.close{'aria-hidden': true, 'data-dismiss': 'modal', type: 'button'} ×
         %h4#myModalLabel.modal-title Modal title
       .modal-body
+
+:scss
+  @media (min-width: 768px){
+    .modal-dialog {
+      width: 800px;
+      margin: 30px auto;
+    }
+  }

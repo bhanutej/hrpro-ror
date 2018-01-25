@@ -9,6 +9,7 @@ class RegistrationsController < Devise::RegistrationsController
       else
         @organization.users.create(user_params)
       end
+    redirect_to root_path if request.subdomain.present?  
   end
 
   private

@@ -11,20 +11,21 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
-  # validates :email, format: { with: Devise::email_regexp, message: "Please provide valid email"  }, presence: true, uniqueness: {scope: :organization_id}
-  # validates :first_name, presence: true
-  # validates_presence_of :last_name
-  # validates_presence_of :account_number
-  # NUMBER_REGEXP = /\A[+-]?\d+\z/
-  # validates :account_number, format: { with: NUMBER_REGEXP, message: "Please provide valid account number"  }
-  # validates_presence_of :emp_id
-  # validates_presence_of :bank_name
-  # validates_presence_of :date_of_birth
-  # validates_presence_of :blood_group
-  # validates_presence_of :contact
-  # CONTACT_NUMBER_REGEXP = /\A[0-9]{10}\z/
-  # validates :contact, format: { with: CONTACT_NUMBER_REGEXP, message: "Please provide valid phone number"  }
-  # validates_uniqueness_of :contact
+  validates :email, format: { with: Devise::email_regexp, message: "Please provide valid email"  }, presence: true, uniqueness: {scope: :organization_id}
+  validates :first_name, presence: true
+  validates_presence_of :last_name
+  validates_presence_of :account_number
+  NUMBER_REGEXP = /\A[+-]?\d+\z/
+  validates :account_number, format: { with: NUMBER_REGEXP, message: "Please provide valid account number"  }
+  validates_presence_of :emp_id
+  validates_presence_of :bank_name
+  validates_presence_of :date_of_birth
+  validates_presence_of :blood_group
+  #validates_presence_of :pan_number
+  validates_presence_of :contact
+  CONTACT_NUMBER_REGEXP = /\A[0-9]{10}\z/
+  validates :contact, format: { with: CONTACT_NUMBER_REGEXP, message: "Please provide valid phone number"  }
+  validates_uniqueness_of :contact
   enumerize :role, in: %i(super_admin admin manager user), default: :user
 
   def name

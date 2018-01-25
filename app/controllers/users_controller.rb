@@ -4,13 +4,11 @@ class UsersController < ApplicationController
   include Organizations
 
   def index
-
   end
 
   def new
     @organization = get_organization(params[:id])
     @user = User.new
-    # @user = @organization.users.new
   end
 
 end

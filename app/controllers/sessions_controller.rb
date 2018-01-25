@@ -8,10 +8,16 @@ class SessionsController < Devise::SessionsController
       if user.present?
         validate_password_and_redirect(user, params[:user][:password]) if organization.users.include? user
         unautherized_access if user.role == 'super_admin'
+      else
+        flash[:email] = 'Please provide valid email'
+        redirect_to root_path
       end
     else
       if user.present?
         user.role != 'super_admin' ? unautherized_access : validate_password_and_redirect(user, params[:user][:password])
+      else
+        flash[:email] = 'Please provide valid email'
+        redirect_to root_path
       end
     end
   end
@@ -19,12 +25,9 @@ class SessionsController < Devise::SessionsController
   private
 
   def validate_password_and_redirect(user, password)
-    if user.valid_password?(password)
-      sign_in(user)
-      redirect_to root_path
-    else
-      super
-    end
+    sign_in(user) if user.valid_password?(password)
+    flash[:password] = 'Wrong password' if user.valid_password?(password)
+    redirect_to root_path
   end
 
   def unautherized_access

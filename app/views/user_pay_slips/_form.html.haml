@@ -1,0 +1,41 @@
+.row.user-pay-slip-content
+  .col-md-3
+    .form-group.label-floating.pay_year
+      %label.control-label Year
+      = select_year Date.today, { :start_year => Date.current.year, :end_year => @current_organization.estb_date.strftime("%Y").to_i }, { :class => 'form-control' }
+  .col-md-3
+    .form-group.label-floating.pay_month
+      %label.control-label Month
+      = select_month(Date.today, {}, { :class => 'form-control' })
+.row.user-pay-slip-content
+  - @current_organization.pay_slips.each do |pay_slip|
+    = form_tag user_pay_slips_path, method: :POST, remote: true do
+      .row{ style: 'display: flex;align-items: center;' }
+        .col-md-2
+          %a.pay-type
+            - if pay_slip.pay_type == true
+              %i.fa.fa-2x.fa-toggle-on
+            - else
+              %i.fa.fa-2x.fa-toggle-off
+        .col-md-8
+          .form-group.label-floating.name
+            %label.control-label
+              = pay_slip.name
+            %input.form-control{ type: 'text', name: 'amount' }
+            %input{ type: 'hidden', name: 'pay_slip_id', value: pay_slip.id }
+            %input.pay-month{ type: 'hidden', name: 'pay_month', value: Date.current.month }
+            %input.pay-year{ type: 'hidden', name: 'pay_year', value: Date.current.year }
+            %input{ type: 'hidden', name: 'user_id', value: @user.id }
+        .col-md-2
+          %button.btn.btn-primary.btn-round.btn-just-icon
+            %i.material-icons done
+
+:javascript
+
+  $('.user-pay-slip-content').on('change', '#date_year', function(){
+    $('.user-pay-slip-content .pay-year').val($(this).val());
+  });
+
+  $('.user-pay-slip-content').on('change', '#date_month', function(){
+    $('.user-pay-slip-content .pay-month').val($(this).val());
+  });
